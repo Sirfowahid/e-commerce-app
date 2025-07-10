@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { HttpClient } from '@angular/common/http';
 import { DestroyRef } from '@angular/core';
@@ -29,25 +29,19 @@ export class ProductsComponent implements OnInit {
 
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
-  products = [
-    { id: 1, name: 'Product 1', price: 100, image: 'product1.jpg' },
-    { id: 2, name: 'Product 2', price: 200, image: 'product2.jpg' },
-    { id: 3, name: 'Product 3', price: 300, image: 'product3.jpg' },
-    { id: 4, name: 'Product 4', price: 400, image: 'product4.jpg' }
-  ];
+  
+  items = signal<Product[]>([]); // Will store fetched products
 
   ngOnInit(): void {
     const subscription = this.httpClient.get<Product[]>('https://fakestoreapi.com/products').subscribe({
-      next : (data:any) =>{
+      next: (data: Product[]) => {
+        this.items.set(data); // Store fetched data
         console.log(data);
-        this.products = data
       }
-    })
+    });
 
-    this.destroyRef.onDestroy(()=>{
+    this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
-      
-    })
+    });
   }
-
 }
