@@ -1,1 +1,46 @@
-<p>details works!</p>
+<div class="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-10">
+  <!-- Product Image -->
+  <div>
+    <img src="https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg" alt="White Gold Plated Princess" class="w-full rounded-lg shadow-md object-contain" />
+  </div>
+
+  <!-- Product Details -->
+  <div class="flex flex-col">
+    <h1 class="text-3xl font-semibold mb-4">White Gold Plated Princess</h1>
+    <p class="text-xl font-bold text-gray-800 mb-6">$9.99 CAD</p>
+
+    <!-- Quantity -->
+    <div class="flex items-center gap-4 mb-6">
+      <label for="quantity" class="font-medium">Quantity</label>
+      <div class="flex items-center border rounded-md">
+        <button class="px-3 py-1 text-lg font-bold hover:bg-gray-200">−</button>
+        <input id="quantity" type="number" value="1" min="1" class="w-16 text-center outline-none" />
+        <button class="px-3 py-1 text-lg font-bold hover:bg-gray-200">+</button>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex flex-col gap-4 mb-6">
+      <button class="border border-gray-800 rounded-md py-3 font-semibold hover:bg-gray-100">
+        Add to cart
+      </button>
+      <button class="bg-yellow-300 rounded-md py-3 font-semibold hover:bg-yellow-400">
+        Buy it now
+      </button>
+    </div>
+
+    <!-- Description -->
+    <p class="text-sm italic text-gray-600 mb-6">
+      Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...
+    </p>
+
+    <!-- Product Features -->
+    <ul class="list-disc list-inside space-y-2 text-gray-700">
+      <li>Made in the USA</li>
+      <li>Genuine white gold plating</li>
+      <li>Elegant solitaire diamond design</li>
+      <li>Comfortable fit for everyday wear</li>
+      <li>Durable and long-lasting shine</li>
+    </ul>
+  </div>
+</div>
