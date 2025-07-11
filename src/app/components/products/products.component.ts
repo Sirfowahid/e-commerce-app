@@ -2,6 +2,8 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { HttpClient } from '@angular/common/http';
 import { DestroyRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 export interface Product {
   id: number;
@@ -21,21 +23,20 @@ export interface Rating {
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductCardComponent],
+  imports: [ProductCardComponent, CommonModule, RouterModule],
   templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+  styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
-  
-  items = signal<Product[]>([]); // Will store fetched products
+
+  items = signal<Product[]>([]);
 
   ngOnInit(): void {
     const subscription = this.httpClient.get<Product[]>('https://fakestoreapi.com/products').subscribe({
       next: (data: Product[]) => {
-        this.items.set(data); // Store fetched data
+        this.items.set(data);
         console.log(data);
       }
     });
