@@ -1,10 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, DestroyRef } from '@angular/core';
 import { ProductCardComponent } from '../product-card/product-card.component';
-import { HttpClient } from '@angular/common/http';
-import { DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Items } from '../../models/Items.model';
+
+import { ProductsService } from '../../core/services/products.service'; 
 
 @Component({
   selector: 'app-products',
@@ -13,17 +13,24 @@ import { Items } from '../../models/Items.model';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
+
 export class ProductsComponent implements OnInit {
-  private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
+  private productService = inject(ProductsService); 
 
   items = signal<Items[]>([]);
+  loading = signal<boolean>(true);
 
   ngOnInit(): void {
-    const subscription = this.httpClient.get<Items[]>('https://fakestoreapi.com/products').subscribe({
+    const subscription = this.productService.getAll().subscribe({
       next: (data: Items[]) => {
         this.items.set(data);
+        this.loading.set(false);
         console.log(data);
+      },
+      error: (error) => {
+        console.error('Error loading products:', error);
+        this.loading.set(false);
       }
     });
 
