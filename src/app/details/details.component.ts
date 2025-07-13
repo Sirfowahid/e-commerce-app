@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Items } from '../models/Items.model';
 
 @Component({
   selector: 'app-details',
@@ -10,16 +11,17 @@ import { CommonModule } from '@angular/common';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
+
 export class DetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private http = inject(HttpClient);
 
-  product = signal<any>(null);
+  product = signal<Items | null>(null);
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.http.get(`https://fakestoreapi.com/products/${id}`).subscribe({
+      this.http.get<Items>(`https://fakestoreapi.com/products/${id}`).subscribe({
         next: (data) => {
           
           this.product.set(data);
