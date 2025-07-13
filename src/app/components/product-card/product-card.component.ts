@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Product } from '../products/products.component';
+import { Items } from '../../models/Items.model';
 @Component({
   selector: 'app-product-card',
   standalone: true,
@@ -8,7 +8,7 @@ import { Product } from '../products/products.component';
   styleUrl: './product-card.component.css'
 })
 export class ProductCardComponent {
-  @Input() product!: Product;
+  @Input() product!: Items;
 
   constructor() {
     

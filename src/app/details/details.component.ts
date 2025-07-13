@@ -15,8 +15,19 @@ import { Items } from '../models/Items.model';
 export class DetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private http = inject(HttpClient);
+  public quantity = signal<number>(1);
 
   product = signal<Items | null>(null);
+
+  onQuantityIncrease(){
+    this.quantity.update(value => value + 1);
+  }
+
+  onQuantityDecrease(){
+    if (this.quantity() > 1) {
+      this.quantity.update(value => value - 1);
+    }
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
