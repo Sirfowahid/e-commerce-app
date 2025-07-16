@@ -32,4 +32,8 @@ export class CartComponent {
   gotoCheckout() {
     this.router.navigate(['/checkout']);
   }
+
+  gotoShopping(){
+    this.router.navigate(['/']);
+  }
 }
