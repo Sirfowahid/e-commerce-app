@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../core/services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,8 +14,13 @@ import { CommonModule } from '@angular/common';
 export class CheckoutComponent implements OnInit {
   checkoutForm!: FormGroup;
   router = inject(Router);
+  private cartService = inject(CartService);
 
   constructor(private fb: FormBuilder) {}
+
+  clearCart() {
+    this.cartService.clearCart();
+  }
 
   ngOnInit(): void {
     this.checkoutForm = this.fb.group({
@@ -58,6 +64,7 @@ export class CheckoutComponent implements OnInit {
     if (this.checkoutForm.valid) {
       console.log('Form Data:', this.checkoutForm.value);
       this.checkoutForm.reset();
+      this.clearCart();
       this.router.navigate(['/success']);
     } else {
       console.log('Form is invalid!');
