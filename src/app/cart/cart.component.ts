@@ -36,4 +36,9 @@ export class CartComponent {
   gotoShopping(){
     this.router.navigate(['/']);
   }
+
+  goToProduct(id: number) {
+  this.router.navigate(['/product', id]);
+}
+
 }

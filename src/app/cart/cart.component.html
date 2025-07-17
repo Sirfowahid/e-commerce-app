@@ -2,92 +2,81 @@
   <h1 class="text-3xl mb-8">Shopping Cart</h1>
 
   @if (cartItems$ | async; as items) {
-    @if (items.length > 0) {
-      <!-- Cart Table Heading -->
-      <div class="flex justify-between font-semibold text-gray-700 border-b pb-2 mb-4">
-        <div class="w-2/3">Product</div>
-        <div class="w-1/6 text-center">Quantity</div>
-        <div class="w-1/6 text-right">Total</div>
+  @if (items.length > 0) {
+  <!-- Cart Table Heading -->
+  <div class="flex justify-between font-semibold text-gray-700 border-b pb-2 mb-4">
+    <div class="w-2/3">Product</div>
+    <div class="w-1/6 text-center">Quantity</div>
+    <div class="w-1/6 text-right">Total</div>
+  </div>
+
+  <!-- Cart Items -->
+  @for (item of items; track item.product.id) {
+  <div class="flex flex-row items-center justify-between border-b py-6 gap-6">
+    <!-- Product Info -->
+    <div class="flex items-center gap-6 w-2/3 cursor-pointer hover:scale-105 hover:shadow-2xl rounded-md p-2 transition"
+      (click)="goToProduct(item.product.id)">
+      <img [src]="item.product.image" [alt]="item.product.title" class="w-24 h-24 object-contain rounded-md" />
+      <div>
+        <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
+        <p class="text-sm text-gray-600">Category: {{ item.product.category }}</p>
+        <p class="text-sm text-gray-500 mt-1">Price: {{ item.product.price | currency }}</p>
       </div>
+    </div>
 
-      <!-- Cart Items -->
-      @for (item of items; track item.product.id) {
-        <div class="flex flex-row items-center justify-between border-b py-6 gap-6">
-          <!-- Product Info -->
-          <div class="flex items-center gap-6 w-2/3">
-            <img
-              [src]="item.product.image"
-              [alt]="item.product.title"
-              class="w-24 h-24 object-contain rounded-md"
-            />
-            <div>
-              <h2 class="text-lg font-semibold">{{ item.product.title }}</h2>
-              <p class="text-sm text-gray-600">Category: {{ item.product.category }}</p>
-              <p class="text-sm text-gray-500 mt-1">Price: {{ item.product.price | currency }}</p>
-            </div>
-          </div>
-
-          <!-- Quantity -->
-          <div class="w-1/6 flex justify-center">
-            <div class="flex items-center border rounded-md">
-              <button 
-                (click)="updateQuantity(item.product.id, item.quantity - 1)"
-                class="px-3 py-1 text-lg font-bold hover:bg-gray-200"
-              >
-                −
-              </button>
-              <span class="w-14 text-center">{{ item.quantity }}</span>
-              <button 
-                (click)="updateQuantity(item.product.id, item.quantity + 1)"
-                class="px-3 py-1 text-lg font-bold hover:bg-gray-200"
-              >
-                +
-              </button>
-            </div>
-          </div>
-
-          <!-- Total -->
-          <div class="w-1/6 flex justify-end items-center gap-4">
-            <p class="text-lg font-bold text-gray-800">
-              {{ (item.product.price * item.quantity) | currency }}
-            </p>
-            <button 
-              (click)="removeItem(item.product.id)"
-              class="text-red-500 hover:text-red-700"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      }
-
-      <!-- Total Section -->
-      <div class="flex flex-col items-end mt-8">
-        <p class="text-xl font-semibold">Subtotal: {{ subtotal$ | async | currency }}</p>
-       
-        <!-- Checkout Buttons -->
-        <div class="flex gap-4 mt-6">
-          <button (click)="gotoShopping()" class="px-6 py-3 border border-gray-600 rounded-md font-medium hover:bg-gray-100">
-            Continue Shopping
-          </button>
-          <button 
-            (click)="clearCart()"
-            class="px-6 py-3 border border-red-500 text-red-500 rounded-md font-medium hover:bg-red-50 mr-2"
-          >
-            Clear Cart
-          </button>
-          <button (click)="gotoCheckout()" class="px-6 py-3 bg-yellow-300 rounded-md font-semibold hover:bg-yellow-400">
-            Checkout
-          </button>
-        </div>
-      </div>
-    } @else {
-      <div class="text-center py-10">
-        <p class="text-gray-500 mb-4">Your cart is empty</p>
-        <button (click)="gotoShopping()" class="px-6 py-2 bg-yellow-300 rounded-md font-medium hover:bg-yellow-400">
-          Continue Shopping
+    <!-- Quantity -->
+    <div class="w-1/6 flex justify-center">
+      <div class="flex items-center border rounded-md">
+        <button (click)="updateQuantity(item.product.id, item.quantity - 1)"
+          class="px-3 py-1 text-lg font-bold hover:bg-gray-200">
+          −
+        </button>
+        <span class="w-14 text-center">{{ item.quantity }}</span>
+        <button (click)="updateQuantity(item.product.id, item.quantity + 1)"
+          class="px-3 py-1 text-lg font-bold hover:bg-gray-200">
+          +
         </button>
       </div>
-    }
+    </div>
+
+    <!-- Total -->
+    <div class="w-1/6 flex justify-end items-center gap-4">
+      <p class="text-lg font-bold text-gray-800">
+        {{ (item.product.price * item.quantity) | currency }}
+      </p>
+      <button (click)="removeItem(item.product.id)" class="text-red-500 hover:text-red-700">
+        ✕
+      </button>
+    </div>
+  </div>
+  }
+
+  <!-- Total Section -->
+  <div class="flex flex-col items-end mt-8">
+    <p class="text-xl font-semibold">Subtotal: {{ subtotal$ | async | currency }}</p>
+
+    <!-- Checkout Buttons -->
+    <div class="flex gap-4 mt-6">
+      <button (click)="gotoShopping()"
+        class="px-6 py-3 border border-gray-600 rounded-md font-medium hover:bg-gray-100">
+        Continue Shopping
+      </button>
+      <button (click)="clearCart()"
+        class="px-6 py-3 border border-red-500 text-red-500 rounded-md font-medium hover:bg-red-50 mr-2">
+        Clear Cart
+      </button>
+      <button (click)="gotoCheckout()" class="px-6 py-3 bg-yellow-300 rounded-md font-semibold hover:bg-yellow-400">
+        Checkout
+      </button>
+    </div>
+  </div>
+  } @else {
+  <div class="text-center py-10">
+    <p class="text-gray-500 mb-4">Your cart is empty</p>
+    <button (click)="gotoShopping()" class="px-6 py-2 bg-yellow-300 rounded-md font-medium hover:bg-yellow-400">
+      Continue Shopping
+    </button>
+  </div>
+  }
   }
 </div>
