@@ -1,0 +1,29 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
+  <div class="bg-white shadow-lg rounded-lg p-8 max-w-xl w-full text-center">
+    <!-- Success Icon -->
+    <div class="flex justify-center mb-6">
+      <svg class="w-20 h-20 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2l4 -4M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10s-4.48 10 -10 10z" />
+      </svg>
+    </div>
+
+    <!-- Success Message -->
+    <h1 class="text-3xl font-bold text-gray-800 mb-2">Thank you for your purchase!</h1>
+    <p class="text-gray-600 mb-6">Your order has been placed successfully. We’ve sent a confirmation to your email.</p>
+
+    <!-- Order Summary (Optional Static or Dynamic) -->
+    <!-- You can replace this with actual order data if needed -->
+    <div class="bg-gray-100 p-4 rounded mb-6 text-left text-sm">
+      <p><strong>Order ID:</strong> #123456789</p>
+      <p><strong>Estimated Delivery:</strong> 3-5 business days</p>
+      <p><strong>Shipping To:</strong> 123 Main Street, Dhaka</p>
+    </div>
+
+    <!-- Continue Shopping -->
+    <button
+      (click)="continueShopping()"
+      class="px-5 bg-yellow-300 rounded-md py-3 font-semibold hover:bg-yellow-400">
+      Continue Shopping
+    </button>
+  </div>
+</div>

@@ -1,1 +1,100 @@
-<p>checkout works!</p>
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
+  <h2 class="text-2xl font-semibold mb-6">Checkout Form</h2>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <!-- Personal Info -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium">First Name</label>
+        <input type="text" formControlName="firstName" class="w-full mt-1 border border-gray-300 rounded p-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Last Name</label>
+        <input type="text" formControlName="lastName" class="w-full mt-1 border border-gray-300 rounded p-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Email</label>
+        <input type="email" formControlName="email" class="w-full mt-1 border border-gray-300 rounded p-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Phone Number</label>
+        <input type="tel" formControlName="phone" class="w-full mt-1 border border-gray-300 rounded p-2" />
+      </div>
+    </div>
+
+    <!-- Present Address -->
+    <div formGroupName="presentAddress" class="border-t pt-6">
+      <h3 class="text-xl font-semibold mb-4">Present Address</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium">District</label>
+          <input type="text" formControlName="district" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Upazila</label>
+          <input type="text" formControlName="upazila" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Post Office</label>
+          <input type="text" formControlName="postOffice" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Village/Town</label>
+          <input type="text" formControlName="villageTown" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Road No</label>
+          <input type="text" formControlName="roadNo" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">House No</label>
+          <input type="text" formControlName="houseNo" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkbox -->
+    <div class="flex items-center space-x-2 pt-2">
+      <input type="checkbox" formControlName="sameAsPresent" class="h-4 w-4 text-blue-600" />
+      <label class="text-sm">Same as Present Address</label>
+    </div>
+
+    <!-- Permanent Address -->
+    <div formGroupName="permanentAddress" class="border-t pt-6">
+      <h3 class="text-xl font-semibold mb-4">Permanent Address</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium">District</label>
+          <input type="text" formControlName="district" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Upazila</label>
+          <input type="text" formControlName="upazila" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Post Office</label>
+          <input type="text" formControlName="postOffice" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Village/Town</label>
+          <input type="text" formControlName="villageTown" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">Road No</label>
+          <input type="text" formControlName="roadNo" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium">House No</label>
+          <input type="text" formControlName="houseNo" class="w-full mt-1 border border-gray-300 rounded p-2" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="pt-6">
+      <button type="submit" class=" px-5 bg-yellow-300 rounded-md py-3 font-semibold hover:bg-yellow-400">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

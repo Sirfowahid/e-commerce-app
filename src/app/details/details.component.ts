@@ -20,6 +20,7 @@ export class DetailsComponent implements OnInit {
 
   product = signal<Items | null>(null);
   quantity = signal<number>(1);
+  showToast = signal<boolean>(false); // Toast flag
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
@@ -46,10 +47,12 @@ export class DetailsComponent implements OnInit {
   addToCart() {
     if (this.product()) {
       this.cartService.addToCart(this.product()!, this.quantity());
+      this.showToast.set(true);
+      setTimeout(() => this.showToast.set(false), 2000); // Hide after 2 seconds
     }
   }
 
   goToCheckout() {
-    this.router.navigate(['/checkout']);
+    this.router.navigate(['/cart']);
   }
 }

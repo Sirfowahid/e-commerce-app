@@ -64,8 +64,7 @@
       <!-- Total Section -->
       <div class="flex flex-col items-end mt-8">
         <p class="text-xl font-semibold">Subtotal: {{ subtotal$ | async | currency }}</p>
-        <p class="text-sm text-gray-500">Taxes and shipping calculated at checkout</p>
-
+       
         <!-- Checkout Buttons -->
         <div class="flex gap-4 mt-6">
           <button (click)="gotoShopping()" class="px-6 py-3 border border-gray-600 rounded-md font-medium hover:bg-gray-100">
