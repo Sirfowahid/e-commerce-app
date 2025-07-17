@@ -1,15 +1,16 @@
+<!-- NAVBAR -->
 <nav class="flex items-center justify-between p-4 max-w-screen-xl mx-auto">
   <!-- Mobile Search -->
-  <a routerLink="/" class="lg:hidden">
+  <button (click)="openSearch()" class="lg:hidden">
     <img src="search.png" alt="search" class="h-8" />
-  </a>
+  </button>
 
   <!-- Logo -->
   <a routerLink="/">
     <img src="logo.webp" alt="logo" class="h-16" />
   </a>
 
-  <!-- Mobile Cart with Badge -->
+  <!-- Mobile Cart -->
   <a routerLink="/cart" class="lg:hidden relative">
     <img src="cart.png" alt="cart" class="h-8" />
     @if (cartService.totalItems$ | async; as count) {
@@ -23,9 +24,9 @@
 
   <!-- Desktop Icons -->
   <div class="items-center gap-x-4 hidden lg:flex">
-    <a routerLink="/">
+    <button (click)="openSearch()">
       <img class="h-8" src="search.png" alt="search" />
-    </a>
+    </button>
     <a routerLink="/cart" class="relative">
       <img class="h-8" src="cart.png" alt="cart" />
       @if (cartService.totalItems$ | async; as count) {
@@ -38,3 +39,23 @@
     </a>
   </div>
 </nav>
+
+<!-- SEARCH MODAL -->
+@if (showSearch()) {
+  <div class="fixed inset-0 z-50 flex flex-col items-center justify-start pt-16 backdrop-blur-sm" (click)="closeSearch()">
+    <div class="w-full max-w-full px-4 md:px-24" (click)="$event.stopPropagation()">
+      <div class="bg-white shadow-md rounded-md flex items-center p-2">
+        <input
+          [formControl]="searchControl"
+          (keydown.enter)="submitSearch()"
+          type="text"
+          placeholder="Search products..."
+          class="flex-1 px-4 py-2 border-none focus:outline-none"
+        />
+        <button (click)="submitSearch()">
+          <img src="search.png" class="h-6 w-6" />
+        </button>
+      </div>
+    </div>
+  </div>
+}
